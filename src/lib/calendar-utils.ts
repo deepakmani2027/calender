@@ -6,18 +6,18 @@ export const MONTH_NAMES = [
 export const DAY_NAMES = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
 export const MONTH_IMAGES = [
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=500&fit=crop", // Jan - snowy mountain
-  "https://images.unsplash.com/photo-1477601263568-180e2c6d046e?w=800&h=500&fit=crop", // Feb - winter forest
-  "https://images.unsplash.com/photo-1462275646964-a0e3c11f18a6?w=800&h=500&fit=crop", // Mar - spring blossoms
-  "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&h=500&fit=crop", // Apr - flowers
-  "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&h=500&fit=crop", // May - green landscape
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=500&fit=crop", // Jun - beach
-  "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&h=500&fit=crop", // Jul - sunset
-  "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=800&h=500&fit=crop", // Aug - summer field
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=500&fit=crop", // Sep - autumn
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop", // Oct - mountains
-  "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=500&fit=crop", // Nov - fog
-  "https://images.unsplash.com/photo-1482442120256-9c03866de390?w=800&h=500&fit=crop", // Dec - winter
+  "/jan.png",
+  "/feb.png",
+  "/mar.png",
+  "/april.png",
+  "/may.png",
+  "/june.png",
+  "/july.png",
+  "/aug.png",
+  "/sept.png",
+  "/oct.png",
+  "/nov.png",
+  "/dec.png",
 ];
 
 export const MONTH_THEMES: Record<number, string> = {

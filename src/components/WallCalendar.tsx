@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Moon, Sun, MapPin, Plus, Check, X, Notebook } from 'lucide-react';
 import { soundManager } from '../lib/SoundManager';
+import { MONTH_IMAGES } from '../lib/calendar-utils';
 
 /** * CALENDAR UTILITIES */
 const MONTH_NAMES = [
@@ -9,21 +10,6 @@ const MONTH_NAMES = [
 ];
 
 const DAY_NAMES = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-
-const MONTH_IMAGES = [
-  "/jan.png",
-  "/feb.png",
-  "/mar.png",
-  "/april.png",
-  "/may.png",
-  "/june.png",
-  "/july.png",
-  "/aug.png",
-  "/sept.png",
-  "/oct.png",
-  "/nov.png",
-  "/dec.png"
-];
 const MONTH_COLORS = [
   "#FF6B6B", "#4ECDC4", "#45B7D1", "#6BCB77", "#FFEEAD", "#00bcd4",
   "#9DE0AD", "#E1F5C4", "#FFD93D", "#6BCB77", "#4D96FF", "#F473B9"
@@ -163,14 +149,14 @@ const CalendarHero = ({ month, year, color }) => (
       className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
     />
     <div
-      className="absolute inset-0 transition-colors duration-700"
+      className="absolute inset-0 transition-colors duration-700 z-10"
       style={{
         backgroundColor: color,
         clipPath: 'polygon(0 80%, 100% 45%, 100% 100%, 0% 100%)',
         mixBlendMode: 'multiply'
       }}
     />
-    <div className="absolute bottom-3 right-5 text-right text-white drop-shadow-xl z-10">
+    <div className="absolute bottom-3 right-5 text-right text-white drop-shadow-xl z-20">
       <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-none drop-shadow-lg">{year}</h1>
       <h2 className="text-2xl sm:text-4xl font-black tracking-wide leading-none drop-shadow-lg uppercase">{MONTH_NAMES[month]}</h2>
     </div>

@@ -8,12 +8,19 @@ interface CalendarHeroProps {
 
 const CalendarHero = ({ month, year, accentColor }: CalendarHeroProps) => {
   return (
-    <div className="relative w-full h-[300px] md:h-[360px] overflow-hidden bg-muted group">
-      {/* Hero Image with zoom effect */}
+    <div className="relative w-full h-[300px] md:h-[360px] overflow-hidden bg-slate-950 group">
       <img
         src={MONTH_IMAGES[month]}
         alt={`${MONTH_NAMES[month]} scenery`}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-35 transition-transform duration-700 group-hover:scale-[1.14]"
+        loading="eager"
+        aria-hidden="true"
+      />
+
+      <img
+        src={MONTH_IMAGES[month]}
+        alt={`${MONTH_NAMES[month]} scenery`}
+        className="relative z-10 w-full h-full object-contain p-3 md:p-5 transition-transform duration-700 group-hover:scale-[1.02]"
         loading="eager"
       />
 
@@ -48,7 +55,7 @@ const CalendarHero = ({ month, year, accentColor }: CalendarHeroProps) => {
       </svg>
 
       {/* Month/Year badge with enhanced styling */}
-      <div className="absolute bottom-6 right-6 text-right z-10">
+      <div className="absolute bottom-6 right-6 text-right z-20">
         <div className="text-primary-foreground text-3xl md:text-4xl font-bold tracking-widest drop-shadow-xl" style={{ textShadow: "3px 3px 8px rgba(0,0,0,0.4)" }}>
           {year}
         </div>
