@@ -528,7 +528,7 @@ export default function App() {
         </div>
 
         {/* Desktop Theme Toggle */}
-        <div className="hidden sm:flex mt-10 gap-4 items-center absolute bottom-80">
+        <div className="hidden sm:flex mt-10 gap-4 items-center absolute bottom-60">
           <button onClick={() => setIsDark(!isDark)} className="p-5 rounded-full bg-white shadow-2xl hover:rotate-12 transition-transform text-gray-800 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700">
             {isDark ? <Sun size={28} className="text-yellow-500" /> : <Moon size={28} className="text-blue-500" />}
           </button>
