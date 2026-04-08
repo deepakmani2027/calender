@@ -1,0 +1,272 @@
+/* Root container setup for 3D perspective */
+#root {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  perspective-origin: center;
+  background: linear-gradient(135deg, var(--background) 0%, hsla(var(--secondary), 0.3) 100%);
+  overflow: hidden;
+}
+
+/* 3D Transform Setup */
+body {
+  perspective: 1500px;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Page flip animation - Ultra realistic 3D */
+.flip-enter {
+  animation: pageFlipInFramer 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+.flip-exit {
+  animation: pageFlipOutFramer 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+@keyframes pageFlipInFramer {
+  0% {
+    opacity: 0;
+    transform: rotateX(90deg) scale(0.95);
+    filter: brightness(0.7) blur(2px);
+    box-shadow: 
+      inset 0 -20px 30px -10px rgba(0, 0, 0, 0.3),
+      0 25px 50px -10px rgba(0, 0, 0, 0.3);
+  }
+  35% {
+    filter: brightness(0.85) blur(1px);
+  }
+  70% {
+    opacity: 1;
+    transform: rotateX(15deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+    filter: brightness(1) blur(0);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.12),
+      0 20px 40px rgba(0, 0, 0, 0.16);
+  }
+}
+
+@keyframes pageFlipOutFramer {
+  0% {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+    filter: brightness(1) blur(0);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.12),
+      0 20px 40px rgba(0, 0, 0, 0.16);
+  }
+  30% {
+    opacity: 1;
+    transform: rotateX(-15deg) scale(0.98);
+    filter: brightness(0.85) blur(1px);
+  }
+  65% {
+    filter: brightness(0.7) blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateX(-90deg) scale(0.95);
+    filter: brightness(0.5) blur(2px);
+    box-shadow: 
+      inset 0 20px 30px -10px rgba(0, 0, 0, 0.3),
+      0 25px 50px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Enhanced background glow effect */
+@keyframes backgroundGlow {
+  0%, 100% {
+    background: linear-gradient(135deg, var(--background) 0%, hsla(var(--secondary), 0.3) 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, hsla(var(--secondary), 0.2) 0%, hsla(var(--secondary), 0.4) 100%);
+  }
+}
+
+#root {
+  animation: backgroundGlow 8s ease-in-out infinite;
+}
+
+/* Calendar container - preserve 3D transformations */
+.calendar-container {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform;
+  animation: slideInUp 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Paper texture and realism */
+.calendar-paper-layer {
+  background: 
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 2px 2px;
+}
+
+/* Enhanced shadows for depth */
+.shadow-deep {
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.12),
+    0 16px 32px rgba(0,0,0,0.16),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.shadow-elevated {
+  box-shadow: 
+    0 8px 16px rgba(0,0,0,0.1),
+    0 16px 32px rgba(0,0,0,0.15),
+    0 32px 64px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Dramatic page flip effect - left side shadow */
+.page-flip-left {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.2) 0%,
+    rgba(0,0,0,0.1) 10%,
+    rgba(0,0,0,0) 30%
+  );
+  box-shadow: inset 30px 0 60px -20px rgba(0,0,0,0.3);
+}
+
+/* Dramatic page flip effect - right side highlight */
+.page-flip-right {
+  background: linear-gradient(
+    270deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0.05) 20%,
+    rgba(255,255,255,0) 40%
+  );
+}
+
+/* Binding effect - shadow */
+.binding-shadow {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.05) 30%,
+    rgba(0,0,0,0) 50%,
+    rgba(0,0,0,0.05) 70%,
+    rgba(0,0,0,0.1) 100%
+  );
+}
+
+/* Micro-interaction ripple effect */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  animation: ripple 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+}
+
+/* Hover glow for interactive elements */
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+}
+
+.hover-glow:hover::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, rgba(0,0,0,0.1), rgba(255,255,255,0.1));
+  animation: shimmerWall 2s infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes shimmerWall {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Disable transitions for important animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Performance optimization */
+.calendar-shadow,
+.calendar-container {
+  backface-visibility: hidden;
+  perspective: 1500px;
+}
+
+/* Typography smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Card flip animation keyframes for ultimate realism - vertical flip */
+@keyframes cardFlipForward {
+  0% {
+    transform: rotateX(0deg) perspective(1200px);
+  }
+  50% {
+    transform: rotateX(90deg) perspective(1200px);
+  }
+  100% {
+    transform: rotateX(180deg) perspective(1200px);
+  }
+}
+
+@keyframes cardFlipBackward {
+  0% {
+    transform: rotateX(0deg) perspective(1200px);
+  }
+  50% {
+    transform: rotateX(-90deg) perspective(1200px);
+  }
+  100% {
+    transform: rotateX(-180deg) perspective(1200px);
+  }
+}
