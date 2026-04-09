@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Moon, Sun, MapPin, Plus, Check, X, Notebook } from 'lucide-react';
 
 /** * CALENDAR UTILITIES */
@@ -98,6 +98,46 @@ const getCalendarDays = (year, month) => {
     days.push({ date, month: nextMonth, year: nextYear, isCurrentMonth: false });
   }
   return days;
+};
+
+/** * SOUND UTILITY */
+const playFlipSound = () => {
+  try {
+    const AudioContextCtor = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextCtor) return;
+
+    const audioCtx = new AudioContextCtor();
+    
+    // Create white noise for the 'rustle' sound
+    const bufferSize = audioCtx.sampleRate * 0.15;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+
+    // Filter the noise to make it sound like paper
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1500, audioCtx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.12);
+
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+
+    noise.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    noise.start();
+    noise.stop(audioCtx.currentTime + 0.15);
+  } catch (e) {
+    console.warn("Audio playback failed", e);
+  }
 };
 
 /** * CUSTOM HOOKS */
@@ -406,6 +446,10 @@ export default function App() {
 
   const navigate = (dir) => {
     if (isAnimating) return;
+    
+    // Play the unique flip sound effect
+    playFlipSound();
+    
     setIsAnimating(true);
     setFlipDir(dir === 1 ? 'forward' : 'backward');
     setTimeout(() => {
@@ -495,7 +539,7 @@ export default function App() {
               {/* Main Content Split: Grid (Main) + Notes (Side) */}
               <div className="flex-1 min-h-0 flex flex-col sm:flex-row overflow-hidden bg-transparent transition-colors duration-500">
                 {/* MOBILE: Grid (top), Notes (bottom)
-                   DESKTOP: Grid (left), Notes (right)
+                    DESKTOP: Grid (left), Notes (right)
                 */}
                 <CalendarGrid
                   days={days}
